@@ -9,13 +9,14 @@ class Habit extends Component {
         this.setState({count: this.state.count+1})
     }
     handleDecrement  = () =>{
-        this.state.count>0 && this.setState({count: this.state.count-1})
+        this.state.count > 0 && this.setState({count: this.state.count-1})
     }
     render() {
+        const {name,count} = this.props.habit
         return (
             <li className="habit">
-                <span className="habit-name">Readign</span>
-                <span className="habit-count">{this.state.count}</span>
+                <span className="habit-name">{name}</span>
+                <span className="habit-count">{count}</span>
                 <button className='habit-button habit-increase' onClick={this.handleIncrement}> 
                     <i className="fas fa-plus-square"></i>
                 </button>
