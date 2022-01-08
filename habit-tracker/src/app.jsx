@@ -26,7 +26,7 @@ class App extends Component {
    });
  }
 
- handleDecrement  = (habit) =>{
+ handleDecrement  = (habit) => {
      const habits = [...this.state.habits];
      const index  = this.state.habits.indexOf(habit);
      habits[index].count && habits[index].count--;
@@ -34,7 +34,7 @@ class App extends Component {
      
  }
 
- handleDelete = (habit) =>{
+ handleDelete = (habit) => {
      const habits = this.state.habits.filter(item => item.id !== habit.id); //fiter를 사용해 배열을 생성하는 방법
      // const habits = [...this.state.habits];  
      // const index  = this.state.habits.indexOf(habit); 
@@ -42,13 +42,17 @@ class App extends Component {
      this.setState({habits});
  }
 
- handleAdd = (name) =>{
-   const habits = [...this.state.habits];
-   const newHabit = {id:Date.now(), name, count: 0};
-   habits.push(newHabit)
-  //  habits[newHabit]
+ handleAdd = (name) => {
+   const habits = [...this.state.habits, {id:Date.now(), name, count:0 }];
    this.setState({habits});
-   console.log(habits)
+ }
+
+ handleReset = () => {
+    const habits = this.state.habits.map(habit => {
+      habit.count = 0;
+      return habit
+    })
+    this.setState({habits})
  }
  
   render() {
@@ -60,7 +64,8 @@ class App extends Component {
          onIncrement={this.handleIncrement}
          onDecrement={this.handleDecrement}
          onDelete={this.handleDelete}
-         onAdd={this.handleAdd}>
+         onAdd={this.handleAdd}
+         onReset={this.handleReset}>
          </Habits>
       </>
     )

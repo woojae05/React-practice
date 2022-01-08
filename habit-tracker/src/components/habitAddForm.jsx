@@ -7,7 +7,6 @@ export default class HabitAddForm extends Component {
     
     onSubmit = (event) =>{
         event.preventDefault();
-        const ref  = this.inputRef
         const name = this.inputRef.current.value;
         name && this.props.onAdd(name);
         this.formRef.current.reset();
