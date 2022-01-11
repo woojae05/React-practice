@@ -16,30 +16,31 @@ class App extends Component {
   }
   
   handleIncrement = (habit) => {
-    const habits = [...this.state.habits]; //새로운 배열 생성 why? 직접적으로 오브젝트를 수정하는 것은 좋지 않은 방법
-    const index  = this.state.habits.indexOf(habit);
-    habits[index].count++;
+    const habits = this.state.habits.map( item => {
+      if( habit.id === item.id ){
+        return {...habit, count: habit.count+1}; //habit 전체를 바꿔 레퍼런스를 바꾼다 beacause shallowCompare
+      }
+      return item;
+    });
     this.setState({habits}); // key 와 value가 같다면 생략 가능
-    const total  = this.state.total;
-    this.state.habits.map(habit=>{
-     total.count+= habit.count;
-   });
  }
 
  handleDecrement  = (habit) => {
-     const habits = [...this.state.habits];
-     const index  = this.state.habits.indexOf(habit);
-     habits[index].count && habits[index].count--;
+   const habits = this.state.habits.map( item => {
+     if(habit.id === item.id){
+       const count = habit.count -1;
+       return {...habit, count: count > 0 ? count : 0 };
+     } return item;
+     })
      this.setState({habits});
-     
+
  }
 
  handleDelete = (habit) => {
-     const habits = this.state.habits.filter(item => item.id !== habit.id); //fiter를 사용해 배열을 생성하는 방법
-     // const habits = [...this.state.habits];  
-     // const index  = this.state.habits.indexOf(habit); 
-     // habits.splice(index,1); // splice를 사용해 특정 인덱스를 삭제하는 방법
-     this.setState({habits});
+    const habits = this.state.habits.filter(item =>{
+      if(habit.id !== item.id) return item
+    })
+    this.setState({habits});
  }
 
  handleAdd = (name) => {
@@ -49,8 +50,9 @@ class App extends Component {
 
  handleReset = () => {
     const habits = this.state.habits.map(habit => {
-      habit.count = 0;
-      return habit
+      if( habit.count !== 0){
+        return {...habit, count: 0}
+      }return habit
     })
     this.setState({habits})
  }
