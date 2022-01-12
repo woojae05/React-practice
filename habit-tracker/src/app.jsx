@@ -3,6 +3,7 @@ import Habits from './components/habits';
 import './app.css'
 import Navbar from './components/navbar';
 class App extends Component {
+  
   state = {
     habits:[
         { id: 1, name: 'Reading', count: 0},
