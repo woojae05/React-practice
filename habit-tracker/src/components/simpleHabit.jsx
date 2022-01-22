@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 
 const SimpleHabit = () => {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(0); // hooks
 
     const handleIncrement = () => {
         setCount(count+1);
