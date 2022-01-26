@@ -53,8 +53,8 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
         <PageUl className="pagination">
           {pageNumbers.map((number) => (
             <PageLi key={number} className="page-item">
-              <PageSpan onClick={() => paginate(number)} className="page-link">
                 {number}
+              <PageSpan onClick={() => paginate(number)} className="page-link"> 
               </PageSpan>
             </PageLi>
           ))}
