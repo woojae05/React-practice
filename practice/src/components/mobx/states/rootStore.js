@@ -1,8 +1,9 @@
 import { MovieStore } from "./movieStore";
 
-export class RootStore {
+export class RootStore{
     movieStore;
-    constructor(){
+
+    constructor() {
         this.movieStore = new MovieStore(this);
     }
 }
